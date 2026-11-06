@@ -1,0 +1,46 @@
+name: Build asset on PR
+on: 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  buildpr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+      - name: set target filename
+        run: |
+          GH_FHEAD="${{ github.event.pull_request.head.ref }}-${{ github.event.pull_request.head.sha }}"
+          echo "GH_FHEAD=${GH_FHEAD:0:-33}" >> $GITHUB_ENV
+      - name: build spec with saxon
+        uses: pdaengeli/use-saxon-he-j@13.1
+        working-directory: ./spec/
+        with:
+          args: -o build/pr-preview-files/${GH_FHEAD}-built.html ttml2.xml xmlspec-ttml2.xsl showAssertions=true
+      - name: git push
+        working-directory: ./spec/build
+        run: |
+          cp -a ../../.git ./
+          git symbolic-ref HEAD refs/heads/gh-pages
+          git fetch origin gh-pages && git reset origin/gh-pages
+          git config user.name "CI (${{ github.actor }})"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A pr-preview-files/*
+          git commit -m "Deploy PR preview build for ${GH_FHEAD}"
+          git push --set-upstream origin gh-pages
+      - name: push comment for built
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ github.event.pull_request.number }},
+              body: "[Preview](https://w3c.github.io/ttml2/pr-preview-files/${GH_FHEAD}-built.html)"
+            })
