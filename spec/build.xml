@@ -282,7 +282,9 @@
     </xmlvalidate>
   </target>
   <target name="validate-tt-specs" description="Validates all Timed Text spec files.">
-    <xmlvalidate lenient="yes" warn="yes" file="ttml2.xml" classpath="/usr/share/java/xml-commons-resolver.jar"/>
+    <xmlvalidate lenient="yes" warn="yes" file="ttml2.xml">
+      <classpath="/usr/share/java/xml-commons-resolver.jar"/>
+    </xmlvalidate>
   </target>
   <target name="validate-profile-transformation" description="Validates transformation profile.">
     <java fork="true" jar="${jing.jar}">
