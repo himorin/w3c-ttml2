@@ -5,6 +5,7 @@
     <path id="saxon8.classpath">
         <pathelement location="saxon8/saxon8.jar"/>
     </path>
+    <path id="xml-commons-resolver.classpath"><pathelement location="/usr/share/java/xml-commons-resolver.jar"/></path>
     <property name="html.dir" value="${basedir}"/>
     <property name="html.name" value="ttml2.html"/>
     <property name="stylesheet" value="xmlspec-ttml2.xsl"/>
@@ -282,9 +283,7 @@
     </xmlvalidate>
   </target>
   <target name="validate-tt-specs" description="Validates all Timed Text spec files.">
-    <xmlvalidate lenient="yes" warn="yes" file="ttml2.xml">
-      <classpath="/usr/share/java/xml-commons-resolver.jar"/>
-    </xmlvalidate>
+    <xmlvalidate lenient="yes" warn="yes" file="ttml2.xml" classpathref="xml-commons-resolver.classpath"/>
   </target>
   <target name="validate-profile-transformation" description="Validates transformation profile.">
     <java fork="true" jar="${jing.jar}">
