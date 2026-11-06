@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='ISO-8859-1' ?>
 
 <!-- Date parameters -->
-<!ENTITY draft.year "2020">
+<!ENTITY draft.year "2026">
 <!ENTITY draft.month "January">
 <!ENTITY draft.mm "01">
 <!ENTITY draft.day "28">
