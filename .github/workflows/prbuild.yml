@@ -8,6 +8,7 @@ jobs:
   buildpr:
     permissions:
       contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -56,5 +57,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: ${{ github.event.pull_request.number }},
-              body: "[Preview](https://w3c.github.io/ttml2/pr-preview-files/${{ env.GH_FHEAD }}-built.html)"
+              body: "[Preview](https://w3c.github.io/ttml2/pr-preview-files/${{ env.GH_FHEAD }}-built.html) | [Diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fwww.w3.org%2FTR%2F2021%2FCR-ttml2-20210309%2F&doc2=https%3A%2F%2Fw3c.github.io%2Fttml2%2Fpr-preview-files%2F${{ env.GH_FHEAD }}-built.html)"
             })
