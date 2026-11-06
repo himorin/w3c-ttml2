@@ -14,10 +14,11 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - name: Install Jing
+      - name: Install Jing and resolver
         run: |
           sudo apt-get update
           sudo apt-get install -y jing
+          sudo apt-get install -y libxml-commons-resolver-java
       - name: validate using ant build.xml
         working-directory: ./spec
         run: ant -verbose validate
