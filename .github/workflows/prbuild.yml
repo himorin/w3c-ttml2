@@ -20,9 +20,8 @@ jobs:
           echo "GH_FHEAD=${GH_FHEAD:0:-33}" >> $GITHUB_ENV
       - name: build spec with saxon
         uses: pdaengeli/use-saxon-he-j@13.1
-        working-directory: ./spec/
         with:
-          args: -o build/pr-preview-files/${GH_FHEAD}-built.html ttml2.xml xmlspec-ttml2.xsl showAssertions=true
+          args: -o spec/build/pr-preview-files/${GH_FHEAD}-built.html spec/ttml2.xml spec/xmlspec-ttml2.xsl showAssertions=true
       - name: git push
         working-directory: ./spec/build
         run: |
