@@ -17,6 +17,7 @@ jobs:
       - name: set target filename
         run: |
           GH_FHEAD="${{ github.event.pull_request.head.ref }}-${{ github.event.pull_request.head.sha }}"
+          GH_FHEAD="${GH_FHEAD//\//-}"
           echo "GH_FHEAD=${GH_FHEAD:0:-33}" >> $GITHUB_ENV
       - name: Install Saxon (libsaxonb-java v9)
         run: |
