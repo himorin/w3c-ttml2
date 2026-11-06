@@ -143,7 +143,6 @@
 	    depends="validate-example-1, validate-example-3, validate-example-4, validate-example-4-overflow"/>
 
 
-<!-- 2026/11 keep
     <target name="build-escapes" description="Generate escaped entites.">
       <apply executable="sed">
         <arg value="-f"/>
@@ -158,12 +157,6 @@
 	</redirector>
       </apply>
     </target>
-
-    <target name="validate-tt-specs" description="Validates all Timed Text spec files."
-        depends="build-escapes">
-        <xmlvalidate lenient="false" warn="yes" file="ttml2.xml"/>
-    </target>
--->
 
     <target name="validate-tt-specs-dont-build-escapes" description="Validates all Timed Text spec files.">
         <xmlvalidate lenient="false" warn="yes" file="ttml2.xml"/>
@@ -282,7 +275,7 @@
       <fileset dir="." includes="*.svg"/>
     </xmlvalidate>
   </target>
-  <target name="validate-tt-specs" description="Validates all Timed Text spec files.">
+  <target name="validate-tt-specs" description="Validates all Timed Text spec files." depends="build-escapes">
     <xmlvalidate lenient="yes" warn="yes" file="ttml2.xml" classpathref="xml-commons-resolver.classpath"/>
   </target>
   <target name="validate-profile-transformation" description="Validates transformation profile.">
