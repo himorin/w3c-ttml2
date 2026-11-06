@@ -18,10 +18,14 @@ jobs:
         run: |
           GH_FHEAD="${{ github.event.pull_request.head.ref }}-${{ github.event.pull_request.head.sha }}"
           echo "GH_FHEAD=${GH_FHEAD:0:-33}" >> $GITHUB_ENV
+      - name: Install Saxon (libsaxonb-java v9)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsaxonb-java
       - name: build spec with saxon
-        uses: ipdxco/saxon@v1
-        with:
-          args: -o spec/build/pr-preview-files/${GH_FHEAD}-built.html spec/ttml2.xml spec/xmlspec-ttml2.xsl showAssertions=true
+        working-directory: ./spec
+        run: |
+          saxonb-xslt -s:ttml2.xml -xsl:xmlspec-ttml2.xsl -o:spec/build/pr-preview-files/${GH_FHEAD}-built.html
       - name: git push
         working-directory: ./spec/build
         run: |
