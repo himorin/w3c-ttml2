@@ -56,5 +56,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: ${{ github.event.pull_request.number }},
-              body: "[Preview](https://w3c.github.io/ttml2/pr-preview-files/${{GH_FHEAD}}-built.html)"
+              body: "[Preview](https://w3c.github.io/ttml2/pr-preview-files/${{ env.GH_FHEAD }}-built.html)"
             })
