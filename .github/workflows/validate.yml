@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jing
-          sudo apt-get install -y libxml-commons-resolver-java
+          sudo apt-get install -y libxml-commons-resolver1.1-java
       - name: validate using ant build.xml
         working-directory: ./spec
         run: ant -verbose validate
