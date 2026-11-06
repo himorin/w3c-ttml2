@@ -25,7 +25,7 @@ jobs:
       - name: run sed for .esc
         working-directory: ./spec
         run: |
-          find . -type f -name '*.xml' -exec sed -f escape.sed {} > {}.esc \;
+          find . -type f -name '*.xml' -exec sh -c 'sed -f escape.sed "$0" > "$0.esc"' {} \;
       - name: build spec with saxon
         working-directory: ./spec
         run: |
