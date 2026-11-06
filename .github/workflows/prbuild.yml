@@ -30,7 +30,8 @@ jobs:
       - name: build spec with saxon
         working-directory: ./spec
         run: |
-          saxonb-xslt -s:ttml2.xml -xsl:xmlspec-ttml2.xsl -o:spec/build/pr-preview-files/${GH_FHEAD}-built.html
+          mkdir -p build/pr-preview-files
+          saxonb-xslt -s:ttml2.xml -xsl:xmlspec-ttml2.xsl -o:build/pr-preview-files/${GH_FHEAD}-built.html
       - name: git push
         working-directory: ./spec/build
         run: |
